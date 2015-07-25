@@ -27,7 +27,12 @@ function TelegramBotClient(token, promise){
 		return new TelegramBotClient(token, promise.then(function(){
 			return apiClient.sendPhoto(chatId, photo, options);
 		}));
+	};
 
+	this.sendLocation = function(chatId, lat, lon, options){
+		return new TelegramBotClient(token, promise.then(function(){
+			return apiClient.sendLocation(chatId, lat, lon, options);
+		}));
 	};
 
 	this.delay = function(ms){

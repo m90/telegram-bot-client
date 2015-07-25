@@ -40,10 +40,19 @@ function ApiClient(token){
 		var payload = {
 			chat_id: chatId
 			, from_chat_id: fromChatId
-			, message_id: message_id
+			, message_id: messageId
 		};
-		return _request('forwardMessage', payload, options);
+		return _request('forwardMessage', payload);
 	};
+
+	this.sendLocation = function(chatId, lat, lon, options){
+		var payload = {
+			chat_id: chatId
+			, latitude: lat
+			, longitude: lon
+		};
+		return _request('sendLocation', payload, options);
+	}
 
 	this.sendPhoto = function(chatId, photo, options){
 		return new Promise(function(resolve, reject){
