@@ -1,0 +1,32 @@
+{
+  "name": "telegram-bot-client",
+  "version": "0.0.0",
+  "description": "Client library for the Telegram messenger Bot API",
+  "main": "index.js",
+  "scripts": {
+    "test": "mocha"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/m90/telegram-bot-client.git"
+  },
+  "keywords": [
+    "telegram",
+    "bot",
+    "api",
+    "client"
+  ],
+  "author": "Frederik Ring <frederik.ring@gmail.com>",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/m90/telegram-bot-client/issues"
+  },
+  "homepage": "https://github.com/m90/telegram-bot-client#readme",
+  "devDependencies": {
+    "mocha": "^2.2.5"
+  },
+  "dependencies": {
+    "promise": "^7.0.3",
+    "superagent": "^1.2.0"
+  }
+}
