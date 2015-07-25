@@ -29,6 +29,24 @@ function TelegramBotClient(token, promise){
 		}));
 	};
 
+	this.sendAudio = function(chatId, audio, options){
+		return new TelegramBotClient(token, promise.then(function(){
+			return apiClient.sendAudio(chatId, audio, options);
+		}));
+	};
+
+	this.sendDocument = function(chatId, doc, options){
+		return new TelegramBotClient(token, promise.then(function(){
+			return apiClient.sendDocument(chatId, doc, options);
+		}));
+	};
+
+	this.sendVideo = function(chatId, video, options){
+		return new TelegramBotClient(token, promise.then(function(){
+			return apiClient.sendVideo(chatId, video, options);
+		}));
+	};
+
 	this.sendLocation = function(chatId, lat, lon, options){
 		return new TelegramBotClient(token, promise.then(function(){
 			return apiClient.sendLocation(chatId, lat, lon, options);
