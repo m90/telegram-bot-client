@@ -6,14 +6,11 @@ var endpoint = 'https://api.telegram.org/bot{0}/{1}';
 
 function ApiClient(token){
 
-	this.sendMessage = function(chatId, message, options){
+
+	function _request(method, payload, options){
 		return new Promise(function(resolve, reject){
-			var payload = {
-				chat_id: chatId
-				, text: message
-			};
 			request
-				.post(util.format(endpoint, token, 'sendMessage'))
+				.post(util.format(endpoint, token, method))
 				.type('form')
 				.send(payload)
 				.send(options || {})
@@ -25,6 +22,23 @@ function ApiClient(token){
 					}
 				});
 		});
+	}
+
+	this.sendMessage = function(chatId, message, options){
+		var payload = {
+			chat_id: chatId
+			, text: message
+		};
+		return _request('sendMessage', payload, options);
+	};
+
+	this.forwardMessage = function(chatId, fromChatId, messageId){
+		var payload = {
+			chat_id: chatId
+			, from_chat_id: fromChatId
+			, message_id: message_id
+		};
+		return _request('forwardMessage', payload, options);
 	};
 
 }

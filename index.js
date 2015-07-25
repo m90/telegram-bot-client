@@ -17,6 +17,12 @@ function TelegramBotClient(token, promise){
 		}));
 	};
 
+	this.forwardMessage = function(chatId, fromChatId, messageId){
+		return new TelegramBotClient(token, promise.then(function(){
+			return apiClient.forwardMessage(chatId, fromChatId, messageId);
+		}));
+	};
+
 	this.delay = function(ms){
 		return new TelegramBotClient(token, promise.then(function(){
 			return new Promise(function(resolve, reject){
@@ -26,7 +32,7 @@ function TelegramBotClient(token, promise){
 	};
 
 	this.promise = function(){
-		return promise();
+		return promise;
 	};
 
 	this.catch = function(handler){
