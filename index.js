@@ -23,6 +23,13 @@ function TelegramBotClient(token, promise){
 		}));
 	};
 
+	this.sendPhoto = function(chatId, photo, options){
+		return new TelegramBotClient(token, promise.then(function(){
+			return apiClient.sendPhoto(chatId, photo, options);
+		}));
+
+	};
+
 	this.delay = function(ms){
 		return new TelegramBotClient(token, promise.then(function(){
 			return new Promise(function(resolve, reject){
