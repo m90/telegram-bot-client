@@ -27,3 +27,5 @@ build/Release
 node_modules
 
 test.js
+*.jpg
+*.png
