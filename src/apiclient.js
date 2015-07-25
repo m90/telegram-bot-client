@@ -1,7 +1,6 @@
 var request = require('superagent');
 var Promise = require('promise');
 var util = require('./util');
-var http = require('http');
 var isUrl = require('is-url');
 var fs = require('fs');
 var tempfile = require('tempfile');
@@ -10,13 +9,12 @@ var endpoint = 'https://api.telegram.org/bot{0}/{1}';
 
 function ApiClient(token){
 
-
-	function _request(method, payload, options){
+	function _post(method, payload, options){
 		return new Promise(function(resolve, reject){
 			request
 				.post(util.format(endpoint, token, method))
 				.type('form')
-				.send(payload)
+				.send(payload || {})
 				.send(options || {})
 				.end(function(err, res){
 					if (res.ok) {
@@ -28,7 +26,23 @@ function ApiClient(token){
 		});
 	}
 
-	function _requestMedia(type, payload, options){
+	function _get(method, payload, options){
+		return new Promise(function(resolve, reject){
+			request
+				.get(util.format(endpoint, token, method))
+				.send(payload || {})
+				.send(options || {})
+				.end(function(err, res){
+					if (res.ok) {
+						resolve(JSON.stringify(res.body));
+					} else {
+						reject(res.text);
+					}
+				});
+		});
+	}
+
+	function _postMedia(type, payload, options){
 		return new Promise(function(resolve, reject){
 			var
 			method = util.format('{0}{1}{2}', 'send', type[0].toUpperCase(), type.substr(1, type.length -1))
@@ -87,7 +101,15 @@ function ApiClient(token){
 			chat_id: chatId
 			, text: message
 		};
-		return _request('sendMessage', payload, options);
+		return _post('sendMessage', payload, options);
+	};
+
+	this.sendChatAction = function(chatId, action){
+		var payload = {
+			chat_id: chatId
+			, text: message
+		};
+		return _post('sendChatAction', payload);
 	};
 
 	this.forwardMessage = function(chatId, fromChatId, messageId){
@@ -96,7 +118,7 @@ function ApiClient(token){
 			, from_chat_id: fromChatId
 			, message_id: messageId
 		};
-		return _request('forwardMessage', payload);
+		return _post('forwardMessage', payload);
 	};
 
 	this.sendLocation = function(chatId, lat, lon, options){
@@ -105,7 +127,7 @@ function ApiClient(token){
 			, latitude: lat
 			, longitude: lon
 		};
-		return _request('sendLocation', payload, options);
+		return _post('sendLocation', payload, options);
 	}
 
 	this.sendPhoto = function(chatId, photo, options){
@@ -113,7 +135,7 @@ function ApiClient(token){
 			chat_id: chatId
 			, media: photo
 		};
-		return _requestMedia('photo', payload, options);
+		return _postMedia('photo', payload, options);
 	};
 
 	this.sendAudio = function(chatId, audio, options){
@@ -121,7 +143,7 @@ function ApiClient(token){
 			chat_id: chatId
 			, media: audio
 		};
-		return _requestMedia('audio', payload, options);
+		return _postMedia('audio', payload, options);
 	};
 
 	this.sendSticker = function(chatId, sticker, options){
@@ -129,7 +151,7 @@ function ApiClient(token){
 			chat_id: chatId
 			, media: sticker
 		};
-		return _requestMedia('sticker', payload, options);
+		return _postMedia('sticker', payload, options);
 	};
 
 	this.sendDocument = function(chatId, doc, options){
@@ -137,7 +159,7 @@ function ApiClient(token){
 			chat_id: chatId
 			, media: doc
 		};
-		return _requestMedia('document', payload, options);
+		return _postMedia('document', payload, options);
 	};
 
 	this.sendVideo = function(chatId, video, options){
@@ -145,7 +167,29 @@ function ApiClient(token){
 			chat_id: chatId
 			, media: video
 		};
-		return _requestMedia('video', payload, options);
+		return _postMedia('video', payload, options);
+	};
+
+	this.getUserProfilePhotos = function(userId, options){
+		var payload = {
+			user_id: userId
+		};
+		return _get('getUserProfilePhotos', payload, options);
+	};
+
+	this.getMe = function(){
+		return _get('getMe', {});
+	};
+
+	this.setWebhook = function(url){
+		var payload = {
+			url:  url
+		};
+		return _post('setWebhook', payload);
+	};
+
+	this.getUpdates = function(options){
+		return _get('getUpdates', null, options);
 	};
 
 }

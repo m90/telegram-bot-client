@@ -11,6 +11,12 @@ function TelegramBotClient(token, promise){
 
 	var apiClient = new ApiClient(token);
 
+	this.getMe = function(){
+		return new TelegramBotClient(token, promise.then(function(){
+			return apiClient.getMe();
+		}));
+	};
+
 	this.sendMessage = function(chatId, message){
 		return new TelegramBotClient(token, promise.then(function(){
 			return apiClient.sendMessage(chatId, message);
@@ -50,6 +56,30 @@ function TelegramBotClient(token, promise){
 	this.sendLocation = function(chatId, lat, lon, options){
 		return new TelegramBotClient(token, promise.then(function(){
 			return apiClient.sendLocation(chatId, lat, lon, options);
+		}));
+	};
+
+	this.sendChatAction = function(chatId, action){
+		return new TelegramBotClient(token, promise.then(function(){
+			return apiClient.sendChatAction(chatId, action);
+		}));
+	};
+
+	this.getUserProfilePhotos = function(chatId, options){
+		return new TelegramBotClient(token, promise.then(function(){
+			return apiClient.getUserProfilePhotos(chatId, options);
+		}));
+	};
+
+	this.setWebhook = function(url){
+		return new TelegramBotClient(token, promise.then(function(){
+			return apiClient.setWebhook(url);
+		}));
+	};
+
+	this.getUpdates = function(options){
+		return new TelegramBotClient(token, promise.then(function(){
+			return apiClient.getUpdates(url);
 		}));
 	};
 
