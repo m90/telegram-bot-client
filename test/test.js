@@ -83,12 +83,39 @@ describe('TelegramBotClient', function(){
 				return client.sendPhoto(CHAT_ID, './test/fixtures/pizzacat.jpg').promise();
 			});
 			it('sends a photo using a URL', function(){
-				return client.sendPhoto(CHAT_ID, 'http://cdn.shopify.com/s/files/1/0066/5282/files/pizzacat_2.jpg').promise();
+				return client.sendPhoto(CHAT_ID, 'https://upload.wikimedia.org/wikipedia/commons/5/50/01-Magpie.jpg').promise();
 			});
 			it('resends photos using file identifiers', function(){
-				return client.sendPhoto(CHAT_ID, 'http://www.wowgreatfinds.com/wp-content/uploads/2013/09/three-cats-in-pizza-tshirt-large.jpg').promise().then(function(res){
+				return client.sendPhoto(CHAT_ID, 'https://upload.wikimedia.org/wikipedia/commons/thumb/0/04/Cyanocitta-cristata-004.jpg/1280px-Cyanocitta-cristata-004.jpg').promise().then(function(res){
 					return client.sendPhoto(CHAT_ID, res.result.photo[0].file_id);
 				});
+			});
+		});
+
+		describe('#sendAudio(chatId, audioReference[, options])', function(){
+			this.timeout(25000);
+			var client = new TelegramBotClient(TOKEN);
+			it('sends audio using a local file', function(){
+				return client.sendAudio(CHAT_ID, './test/fixtures/bluejay.ogg').promise();
+			});
+			it('sends audio using a URL', function(){
+				return client.sendAudio(CHAT_ID, 'https://upload.wikimedia.org/wikipedia/commons/7/72/Cyanocitta_cristata_-_Blue_Jay_-_XC109601.ogg').promise();
+			});
+		});
+
+		describe('#sendDocument(chatId, documentReference[, options])', function(){
+			this.timeout(25000);
+			var client = new TelegramBotClient(TOKEN);
+			it('sends a document using a local file', function(){
+				return client.sendDocument(CHAT_ID, './test/fixtures/doc.txt').promise();
+			});
+		});
+
+		describe('#sendSticker(chatId, stickerReference[, options])', function(){
+			this.timeout(25000);
+			var client = new TelegramBotClient(TOKEN);
+			it('sends a sticker using a local file', function(){
+				return client.sendSticker(CHAT_ID, './test/fixtures/sticker.webp').promise();
 			});
 		});
 
