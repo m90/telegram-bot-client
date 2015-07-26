@@ -139,7 +139,7 @@ pauses the queue for the give duration
 ##### `#promise()`
 unwraps the chain and returns a promise for the last operation
 
-#### `#then(successHandler, errorHandler)`
+##### `#then(successHandler, errorHandler)`
 exposes the last operation's result via a promise interface
 - successHandler: handler being passed the result
 - errorHandler: handler being passed the error
