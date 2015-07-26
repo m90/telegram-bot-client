@@ -46,7 +46,6 @@ function ApiClient(token){
 		return new Promise(function(resolve, reject){
 			var
 			method = util.format('{0}{1}{2}', 'send', type[0].toUpperCase(), type.substr(1, type.length -1))
-			, uppercased = method[0]
 			, r = request
 				.post(util.format(endpoint, token, method))
 				.field('chat_id', payload.chat_id)
