@@ -79,6 +79,10 @@ gets updates (messages) sent to the bot
 gets a user's profile photos
 - userId: the user's id
 
+##### `#setWebhook(url)`
+sets or removes the webhook url to use
+- url: the url, to remove the webhook pass `''`
+
 ##### `#sendMessage(chatId, text[, options])`
 sends a message
 - chatId: the chat's id
