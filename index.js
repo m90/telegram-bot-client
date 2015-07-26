@@ -20,20 +20,11 @@ function TelegramBotClient(token, promise){
 		};
 	};
 
-	this.getMe = makeChainableMethod('getMe');
-	this.getUserProfilePhotos = makeChainableMethod('getUserProfilePhotos');
-	this.getUpdates = makeChainableMethod('getUpdates');
-
-	this.setWebhook = makeChainableMethod('setWebhook');
-
-	this.sendMessage = makeChainableMethod('sendMessage');
-	this.forwardMessage = makeChainableMethod('forwardMessage');
-	this.sendPhoto = makeChainableMethod('sendPhoto');
-	this.sendAudio = makeChainableMethod('sendAudio');
-	this.sendDocument = makeChainableMethod('sendDocument');
-	this.sendVideo = makeChainableMethod('sendVideo');
-	this.sendLocation = makeChainableMethod('sendLocation');
-	this.sendChatAction = makeChainableMethod('sendChatAction');
+	for (var method in apiClient){
+		if (apiClient.hasOwnProperty(method)){
+			this[method] = makeChainableMethod(method);
+		}
+	}
 
 	this.delay = function(ms){
 		return new TelegramBotClient(token, promise.then(function(){
