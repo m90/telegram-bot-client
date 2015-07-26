@@ -7,6 +7,6 @@ module.exports = {
 	}
 	, isFileId: function(el){
 		/* jshint eqeqeq: false */
-		return parseInt(el, 10) == el;
+		return (/[a-z0-9\-_]{55}/i).test(el);
 	}
 };

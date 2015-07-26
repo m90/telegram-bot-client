@@ -18,7 +18,7 @@ function ApiClient(token){
 				.send(options || {})
 				.end(function(err, res){
 					if (res.ok) {
-						resolve(JSON.stringify(res.body));
+						resolve(res.body);
 					} else {
 						reject(res.text);
 					}
@@ -34,7 +34,7 @@ function ApiClient(token){
 				.send(options || {})
 				.end(function(err, res){
 					if (res.ok) {
-						resolve(JSON.stringify(res.body));
+						resolve(res.body);
 					} else {
 						reject(res.text);
 					}
@@ -85,7 +85,7 @@ function ApiClient(token){
 
 				r.end(function(err, res){
 					if (res.ok) {
-						resolve(JSON.stringify(res.body));
+						resolve(res.body);
 					} else {
 						reject(res.text);
 					}
