@@ -1,4 +1,5 @@
 var assert = require('assert');
+var Promise = require('promise');
 
 var TelegramBotClient = require('./../index');
 
@@ -21,6 +22,16 @@ describe('TelegramBotClient', function(){
 				.sendMessage(CHAT_ID, 'I can wait')
 				.promise();
 		});
+		it('can be unwrapped into a promise', function(){
+			var p = client.sendMessage(CHAT_ID, 'Promises! ftw!').promise();
+			assert(p instanceof Promise);
+		});
+		it('exposes a fake `.then`', function(done){
+			var p = client.sendMessage(CHAT_ID, 'Promises! ftw!').then(function(res){
+				assert(res.ok);
+				done();
+			});
+		});
 		it('passes errors down the chain', function(done){
 			client
 				.sendMessage(CHAT_ID)
@@ -35,7 +46,7 @@ describe('TelegramBotClient', function(){
 
 	describe('Methods', function(){
 
-		describe('#sendMessage', function(){
+		describe('#sendMessage(chatId, text[, options])', function(){
 			this.timeout(10000);
 			var client = new TelegramBotClient(TOKEN);
 			it('sends a message', function(){
@@ -49,7 +60,7 @@ describe('TelegramBotClient', function(){
 			});
 		});
 
-		describe('#forwardMessage', function(){
+		describe('#forwardMessage(chatId, fromChatId, messageId)', function(){
 			this.timeout(10000);
 			var client = new TelegramBotClient(TOKEN);
 			it('forwards sent messages when passing an id', function(){
@@ -65,7 +76,7 @@ describe('TelegramBotClient', function(){
 			});
 		});
 
-		describe('#sendPhoto', function(){
+		describe('#sendPhoto(chatId, photoReference[, options])', function(){
 			this.timeout(25000);
 			var client = new TelegramBotClient(TOKEN);
 			it('sends a photo using a local file', function(){
@@ -81,7 +92,7 @@ describe('TelegramBotClient', function(){
 			});
 		});
 
-		describe('#sendLocation', function(){
+		describe('#sendLocation(chatId, lat, lon)', function(){
 			this.timeout(10000);
 			var client = new TelegramBotClient(TOKEN);
 			it('sends a location by passing lat and lon', function(){
@@ -91,6 +102,24 @@ describe('TelegramBotClient', function(){
 				client.sendLocation(CHAT_ID, 52.520007).catch(function(err){
 					assert(err);
 					done();
+				});
+			});
+		});
+
+		describe('#sendChatAction(chatId, action)', function(){
+			this.timeout(10000);
+			var client = new TelegramBotClient(TOKEN);
+			it('sends chat actions', function(){
+				return client.sendChatAction(CHAT_ID, 'typing').promise();
+			});
+		});
+
+		describe('#getMe()', function(){
+			this.timeout(10000);
+			var client = new TelegramBotClient(TOKEN);
+			it('gets infos about the bot', function(){
+				return client.getMe().promise().then(function(res){
+					assert(res.result.id);
 				});
 			});
 		});
