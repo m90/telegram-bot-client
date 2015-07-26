@@ -124,6 +124,38 @@ describe('TelegramBotClient', function(){
 			});
 		});
 
+		describe('#getUpdates', function(){
+			this.timeout(10000);
+			var client = new TelegramBotClient(TOKEN);
+			it('gets updates the bot', function(){
+				return client.getUpdates().promise().then(function(res){
+					assert(typeof res.result.length !== 'undefined');
+				});
+			});
+		});
+
+		describe('#setWebhook', function(){
+			this.timeout(10000);
+			var client = new TelegramBotClient(TOKEN);
+			it('sets webhook values', function(){
+				return client.setWebhook('123.123.123.123').promise().then(function(res){
+					assert.equal(res.result, true);
+				});
+			});
+			it('rejects invalid values', function(done){
+				client.setWebhook('this is not a url').catch(function(err){
+					assert(err);
+					done();
+				});
+			});
+			it('unsets webhook values', function(){
+				return client.setWebhook('').promise().then(function(res){
+					assert.equal(res.result, true);
+				});
+			});
+
+		});
+
 	});
 
 });

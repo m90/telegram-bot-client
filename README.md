@@ -70,6 +70,9 @@ All [methods described by the API docs](https://core.telegram.org/bots/api#avail
 ##### `#getMe()`
 gets info on the bot
 
+##### `#getUpdates()`
+gets updates (messages) sent to the bot
+
 ##### `#sendMessage(chatId, text[, options])`
 sends a message
 - chatId: the chat's id

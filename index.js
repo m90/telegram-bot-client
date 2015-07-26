@@ -42,7 +42,6 @@ function TelegramBotClient(token, promise){
 		promise.then(handler, errHandler);
 	};
 
-
 	this.catch = function(handler){
 		promise.catch(handler);
 	};

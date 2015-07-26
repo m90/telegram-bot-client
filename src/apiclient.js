@@ -185,6 +185,10 @@ function ApiClient(token){
 		return _get('getMe', {});
 	};
 
+	this.getUpdates = function(options){
+		return _get('getUpdates', {}, options);
+	};
+
 	this.setWebhook = function(url){
 		var payload = {
 			url:  url
