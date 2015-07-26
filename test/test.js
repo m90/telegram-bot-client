@@ -154,7 +154,7 @@ describe('TelegramBotClient', function(){
 		describe('#getUpdates([options])', function(){
 			this.timeout(10000);
 			var client = new TelegramBotClient(TOKEN);
-			it('gets updates the bot', function(){
+			it('gets updates for the bot', function(){
 				return client.getUpdates().promise().then(function(res){
 					assert(typeof res.result.length !== 'undefined');
 				});
