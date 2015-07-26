@@ -130,5 +130,25 @@ sends a chat action
 - chatId: the chat's id
 - action: the action to send
 
+### Additional methods:
+
+##### `#delay(duration)`
+pauses the queue for the give duration
+- duration: the time to pause in ms
+
+##### `#promise()`
+unwraps the chain and returns a promise for the last operation
+
+#### `#then(successHandler, errorHandler)`
+exposes the last operation's result via a promise interface
+- successHandler: handler being passed the result
+- errorHandler: handler being passed the error
+
+##### `#catch(handler)`
+handles errors occured in the chain
+- handler: error handler function
+
+
+
 ### License
 MIT © [Frederik Ring](http://www.frederikring.com)
