@@ -70,8 +70,12 @@ All [methods described by the API docs](https://core.telegram.org/bots/api#avail
 ##### `#getMe()`
 gets info on the bot
 
-##### `#getUpdates()`
+##### `#getUpdates([options])`
 gets updates (messages) sent to the bot
+
+##### `#getUserProfilePhotos(userId[, options])`
+gets a user's profile photos
+- userId: the user's id
 
 ##### `#sendMessage(chatId, text[, options])`
 sends a message
@@ -119,10 +123,6 @@ sends a location
 sends a chat action
 - chatId: the chat's id
 - action: the action to send
-
-##### `#getUserProfilePhotos(userId[, options])`
-gets a user's profile photos
-- userId: the user's id
 
 ### License
 MIT © [Frederik Ring](http://www.frederikring.com)
