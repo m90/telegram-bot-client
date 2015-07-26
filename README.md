@@ -2,7 +2,7 @@
 
 [![Build Status](https://travis-ci.org/m90/telegram-bot-client.svg?branch=master)](https://travis-ci.org/m90/telegram-bot-client)
 
-> node.js client for the Telegram messenger Bot API
+> node.js client for the [Telegram messenger Bot API](https://core.telegram.org/bots/api)
 
 ### Installation
 Install via npm:
