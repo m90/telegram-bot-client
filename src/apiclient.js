@@ -57,7 +57,7 @@ function ApiClient(token){
 						.end(function(err, res){
 							var tmpPath = tempfile(res.header['content-type'].split('/')[1]);
 							if (err){
-								reject(err)
+								reject(err);
 								return;
 							}
 							fs.writeFile(tmpPath, res.body, function(err){
@@ -78,23 +78,28 @@ function ApiClient(token){
 				}
 			}
 			mediaData.then(function(data){
-				r.attach(type, data[0])
-					.end(function(err, res){
-						if (res.ok) {
-							resolve(JSON.stringify(res.body));
-						} else {
-							reject(res.text);
-						}
-						if (data[1]){
-							fs.unlink(data[0]);
-						}
-					});
+				if (util.isFileId(data)){
+					r.field(type, data[0]);
+				} else {
+					r.attach(type, data[0]);
+				}
+
+				r.end(function(err, res){
+					if (res.ok) {
+						resolve(JSON.stringify(res.body));
+					} else {
+						reject(res.text);
+					}
+					if (data[1]){
+						fs.unlink(data[0]);
+					}
+				});
 			}, function(err){
 				reject(err);
 			});
 		});
 
-	};
+	}
 
 	this.sendMessage = function(chatId, message, options){
 		var payload = {
@@ -107,7 +112,7 @@ function ApiClient(token){
 	this.sendChatAction = function(chatId, action){
 		var payload = {
 			chat_id: chatId
-			, text: message
+			, action: action
 		};
 		return _post('sendChatAction', payload);
 	};
@@ -128,7 +133,7 @@ function ApiClient(token){
 			, longitude: lon
 		};
 		return _post('sendLocation', payload, options);
-	}
+	};
 
 	this.sendPhoto = function(chatId, photo, options){
 		var payload = {

@@ -5,4 +5,8 @@ module.exports = {
 			return data[parseInt(m1, 10)];
 		});
 	}
+	, isFileId: function(el){
+		/* jshint eqeqeq: false */
+		return parseInt(el, 10) == el;
+	}
 };
