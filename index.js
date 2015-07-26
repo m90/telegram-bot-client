@@ -9,79 +9,31 @@ function TelegramBotClient(token, promise){
 
 	promise = promise || Promise.resolve();
 
-	var apiClient = new ApiClient(token);
-
-	this.getMe = function(){
-		return new TelegramBotClient(token, promise.then(function(){
-			return apiClient.getMe();
-		}));
+	var
+	apiClient = new ApiClient(token)
+	, makeChainableMethod = function(method){
+		return function(){
+			var args = [].slice.call(arguments);
+			return new TelegramBotClient(token, promise.then(function(){
+				return apiClient[method].apply(null, args);
+			}));
+		};
 	};
 
-	this.sendMessage = function(chatId, message){
-		return new TelegramBotClient(token, promise.then(function(){
-			return apiClient.sendMessage(chatId, message);
-		}));
-	};
+	this.getMe = makeChainableMethod('getMe');
+	this.getUserProfilePhotos = makeChainableMethod('getUserProfilePhotos');
+	this.getUpdates = makeChainableMethod('getUpdates');
 
-	this.forwardMessage = function(chatId, fromChatId, messageId){
-		return new TelegramBotClient(token, promise.then(function(){
-			return apiClient.forwardMessage(chatId, fromChatId, messageId);
-		}));
-	};
+	this.setWebhook = makeChainableMethod('setWebhook');
 
-	this.sendPhoto = function(chatId, photo, options){
-		return new TelegramBotClient(token, promise.then(function(){
-			return apiClient.sendPhoto(chatId, photo, options);
-		}));
-	};
-
-	this.sendAudio = function(chatId, audio, options){
-		return new TelegramBotClient(token, promise.then(function(){
-			return apiClient.sendAudio(chatId, audio, options);
-		}));
-	};
-
-	this.sendDocument = function(chatId, doc, options){
-		return new TelegramBotClient(token, promise.then(function(){
-			return apiClient.sendDocument(chatId, doc, options);
-		}));
-	};
-
-	this.sendVideo = function(chatId, video, options){
-		return new TelegramBotClient(token, promise.then(function(){
-			return apiClient.sendVideo(chatId, video, options);
-		}));
-	};
-
-	this.sendLocation = function(chatId, lat, lon, options){
-		return new TelegramBotClient(token, promise.then(function(){
-			return apiClient.sendLocation(chatId, lat, lon, options);
-		}));
-	};
-
-	this.sendChatAction = function(chatId, action){
-		return new TelegramBotClient(token, promise.then(function(){
-			return apiClient.sendChatAction(chatId, action);
-		}));
-	};
-
-	this.getUserProfilePhotos = function(chatId, options){
-		return new TelegramBotClient(token, promise.then(function(){
-			return apiClient.getUserProfilePhotos(chatId, options);
-		}));
-	};
-
-	this.setWebhook = function(url){
-		return new TelegramBotClient(token, promise.then(function(){
-			return apiClient.setWebhook(url);
-		}));
-	};
-
-	this.getUpdates = function(options){
-		return new TelegramBotClient(token, promise.then(function(){
-			return apiClient.getUpdates(url);
-		}));
-	};
+	this.sendMessage = makeChainableMethod('sendMessage');
+	this.forwardMessage = makeChainableMethod('forwardMessage');
+	this.sendPhoto = makeChainableMethod('sendPhoto');
+	this.sendAudio = makeChainableMethod('sendAudio');
+	this.sendDocument = makeChainableMethod('sendDocument');
+	this.sendVideo = makeChainableMethod('sendVideo');
+	this.sendLocation = makeChainableMethod('sendLocation');
+	this.sendChatAction = makeChainableMethod('sendChatAction');
 
 	this.delay = function(ms){
 		return new TelegramBotClient(token, promise.then(function(){
@@ -94,6 +46,11 @@ function TelegramBotClient(token, promise){
 	this.promise = function(){
 		return promise;
 	};
+
+	this.then = function(handler, errHandler){
+		promise.then(handler, errHandler);
+	};
+
 
 	this.catch = function(handler){
 		promise.catch(handler);
