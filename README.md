@@ -58,7 +58,9 @@ client
 All methods are following the same convention: Required arguments are passed seperately, all optional parameters can be wrapped into an object and be supplied as the method's last argument:
 
 ```js
-client.sendMessage(CHAT_ID, 'Look at this: https://www.youtube.com/watch?v=qb_hqexKkw8', { disable_web_page_preview: true });
+var messageText = 'Look at this: https://www.youtube.com/watch?v=qb_hqexKkw8';
+var opts = { disable_web_page_preview: true };
+client.sendMessage(CHAT_ID, messageText, opts);
 ```
 
 ### Available methods:
