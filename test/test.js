@@ -124,7 +124,7 @@ describe('TelegramBotClient', function(){
 			});
 		});
 
-		describe('#getUpdates', function(){
+		describe('#getUpdates([options])', function(){
 			this.timeout(10000);
 			var client = new TelegramBotClient(TOKEN);
 			it('gets updates the bot', function(){
@@ -134,7 +134,7 @@ describe('TelegramBotClient', function(){
 			});
 		});
 
-		describe('#setWebhook', function(){
+		describe('#setWebhook(url)', function(){
 			this.timeout(10000);
 			var client = new TelegramBotClient(TOKEN);
 			it('sets webhook values', function(){
