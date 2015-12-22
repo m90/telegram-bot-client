@@ -29,8 +29,8 @@
   },
   "dependencies": {
     "is-url": "^1.2.1",
-    "promise": "^7.0.3",
-    "superagent": "^1.2.0",
+    "promise": "^7.0.4",
+    "superagent": "^1.6.1",
     "tempfile": "^1.1.1"
   }
 }
