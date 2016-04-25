@@ -3,7 +3,7 @@ var Promise = require('promise');
 
 var TelegramBotClient = require('./../index');
 
-var CHAT_ID = process.env.TELEGRAM_ID || 777000;
+var CHAT_ID = process.env.TELEGRAM_ID || 89149957;
 var TOKEN = process.env.TELEGRAM_TOKEN;
 
 if (!TOKEN){
