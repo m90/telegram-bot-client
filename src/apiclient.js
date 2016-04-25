@@ -4,6 +4,7 @@ var util = require('./util');
 var isUrl = require('is-url');
 var fs = require('fs');
 var tempfile = require('tempfile');
+var format = require('fr');
 
 var endpoint = 'https://api.telegram.org/bot{0}/{1}';
 
@@ -12,7 +13,7 @@ function ApiClient(token){
 	function _post(method, payload, options){
 		return new Promise(function(resolve, reject){
 			request
-				.post(util.format(endpoint, token, method))
+				.post(format(endpoint, token, method))
 				.type('form')
 				.send(payload || {})
 				.send(options || {})
@@ -29,7 +30,7 @@ function ApiClient(token){
 	function _get(method, payload, options){
 		return new Promise(function(resolve, reject){
 			request
-				.get(util.format(endpoint, token, method))
+				.get(format(endpoint, token, method))
 				.send(payload || {})
 				.send(options || {})
 				.end(function(err, res){
@@ -45,9 +46,9 @@ function ApiClient(token){
 	function _postMedia(type, payload, options){
 		return new Promise(function(resolve, reject){
 			var
-			method = util.format('{0}{1}{2}', 'send', type[0].toUpperCase(), type.substr(1, type.length -1))
+			method = format('{0}{1}{2}', 'send', type[0].toUpperCase(), type.substr(1, type.length -1))
 			, r = request
-				.post(util.format(endpoint, token, method))
+				.post(format(endpoint, token, method))
 				.field('chat_id', payload.chat_id)
 			, mediaData = new Promise(function(resolve, reject){
 				if (isUrl(payload.media)){
