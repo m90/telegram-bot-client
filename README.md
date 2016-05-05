@@ -149,6 +149,16 @@ sends a chat action
 - chatId: the chat's id
 - action: the action to send
 
+##### `#kickChatMember(chatId, userId)`
+kicks a user from a chat
+- chatId: the chat's id
+- userId: the user id to ban
+
+##### `#unbanChatMember(chatId, userId)`
+unbans a previously kicked user
+- chatId: the chat's id
+- userId: the user id to unban
+
 ### Additional methods:
 
 ##### `#delay(duration)`

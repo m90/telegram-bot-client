@@ -135,7 +135,6 @@ function ApiClient(token){
 		return _post('sendLocation', payload, options);
 	};
 
-	// https://core.telegram.org/bots/api#sendvenue
 	this.sendVenue = function(chatId, lat, lon, title, address, options){
 		var payload = {
 			chat_id: chatId
@@ -163,7 +162,6 @@ function ApiClient(token){
 		return _postMedia('audio', payload, options);
 	};
 
-	//https://core.telegram.org/bots/api#sendvoice
 	this.sendVoice = function(chatId, voice, options){
 		var payload = {
 			chat_id: chatId
@@ -214,6 +212,22 @@ function ApiClient(token){
 
 	this.getMe = function(){
 		return _get('getMe', {});
+	};
+
+	this.kickChatMember = function(chatId, userId){
+		var payload = {
+			chat_id: chatId
+			, user_id: userId
+		};
+		return _post('kickChatMember', payload);
+	};
+
+	this.unbanChatMember = function(chatId, userId){
+		var payload = {
+			chat_id: chatId
+			, user_id: userId
+		};
+		return _post('unbanChatMember', payload);
 	};
 
 	this.getUpdates = function(options){
