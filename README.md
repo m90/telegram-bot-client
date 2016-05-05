@@ -178,7 +178,7 @@ edit a message's caption
 edit a message's reply markup
 - chatId: the chat's id
 - identifier: message or inline message id
--
+
 ##### `#answerInlineQuery(inlineQueryId, results[, options])`
 ánswer an inline query
 - inlineQueryId: the inline query's id
