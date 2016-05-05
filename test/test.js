@@ -127,7 +127,7 @@ describe('TelegramBotClient', function(){
 			});
 		});
 
-		describe('#sendLocation(chatId, lat, lon)', function(){
+		describe('#sendLocation(chatId, lat, lon[, options])', function(){
 			this.timeout(10000);
 			var client = new TelegramBotClient(TOKEN);
 			it('sends a location by passing lat and lon', function(){
@@ -141,13 +141,22 @@ describe('TelegramBotClient', function(){
 			});
 		});
 
-		describe('#sendVenue(chatId, lat, lon, title, address)', function(){
+		describe('#sendVenue(chatId, lat, lon, title, address[, options])', function(){
 			this.timeout(10000);
 			var client = new TelegramBotClient(TOKEN);
 			it('sends a location by passing lat, lon, title, address', function(){
 				return client.sendVenue(CHAT_ID, 52.551110, 13.331278, 'Volkspark Rehberge', 'Windhuker Str. 52A, 13351 Berlin').promise();
 			});
 		});
+
+		describe('#sendContact(chatId, phoneNumber, firstName[, options])', function(){
+			this.timeout(10000);
+			var client = new TelegramBotClient(TOKEN);
+			it('sends a contact', function(){
+				return client.sendContact(CHAT_ID, '1-800-I-CAN-SUE', 'John', { last_name: 'Doe' }).promise();
+			});
+		});
+
 
 		describe('#sendChatAction(chatId, action)', function(){
 			this.timeout(10000);

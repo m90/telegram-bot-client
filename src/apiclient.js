@@ -196,6 +196,15 @@ function ApiClient(token){
 		return _postMedia('video', payload, options);
 	};
 
+	this.sendContact = function(chatId, phoneNumber, firstName, options){
+		var payload = {
+			chat_id: chatId
+			, phone_number: phoneNumber
+			, first_name: firstName
+		};
+		return _post('sendContact', payload, options);
+	};
+
 	this.getUserProfilePhotos = function(userId, options){
 		var payload = {
 			user_id: userId
