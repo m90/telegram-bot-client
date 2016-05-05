@@ -141,6 +141,14 @@ describe('TelegramBotClient', function(){
 			});
 		});
 
+		describe('#sendVenue(chatId, lat, lon, title, address)', function(){
+			this.timeout(10000);
+			var client = new TelegramBotClient(TOKEN);
+			it('sends a location by passing lat, lon, title, address', function(){
+				return client.sendVenue(CHAT_ID, 52.551110, 13.331278, 'Volkspark Rehberge', 'Windhuker Str. 52A, 13351 Berlin').promise();
+			});
+		});
+
 		describe('#sendChatAction(chatId, action)', function(){
 			this.timeout(10000);
 			var client = new TelegramBotClient(TOKEN);

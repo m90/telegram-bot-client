@@ -129,6 +129,14 @@ sends a location
 - chatId: the chat's id
 - lat: latitude
 - lon: longitude
+-
+##### `#sendVenue(chatId, lat, lon, title, address[, options])`
+sends a venue
+- chatId: the chat's id
+- lat: latitude
+- lon: longitude
+- title: title of the venue
+- address: address of the venue
 
 ##### `#sendChatAction(chatId, action)`
 sends a chat action

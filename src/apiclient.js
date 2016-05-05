@@ -135,6 +135,18 @@ function ApiClient(token){
 		return _post('sendLocation', payload, options);
 	};
 
+	// https://core.telegram.org/bots/api#sendvenue
+	this.sendVenue = function(chatId, lat, lon, title, address, options){
+		var payload = {
+			chat_id: chatId
+			, latitude: lat
+			, longitude: lon
+			, title: title
+			, address: address
+		};
+		return _post('sendVenue', payload, options);
+	};
+
 	this.sendPhoto = function(chatId, photo, options){
 		var payload = {
 			chat_id: chatId
