@@ -168,7 +168,7 @@ edit a message's text
 - chatId: the chat's id
 - identifier: message or inline message id
 - text: the updated text
--
+
 ##### `#editMessageCaption([chatId,] identifier[, options])`
 edit a message's caption
 - chatId: the chat's id
