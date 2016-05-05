@@ -104,6 +104,11 @@ sends audio
 - chatId: the chat's id
 - audioReference: this can be a local file path, a URL or a telegram file id
 
+##### `#sendVoice(chatId, voiceReference[, options])`
+sends audio
+- chatId: the chat's id
+- voiceReference: this can be a local file path or a telegram file id
+
 ##### `#sendDocument(chatId, documentReference[, options])`
 sends a document
 - chatId: the chat's id

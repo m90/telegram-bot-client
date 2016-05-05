@@ -151,6 +151,15 @@ function ApiClient(token){
 		return _postMedia('audio', payload, options);
 	};
 
+	//https://core.telegram.org/bots/api#sendvoice
+	this.sendVoice = function(chatId, voice, options){
+		var payload = {
+			chat_id: chatId
+			, media: voice
+		};
+		return _postMedia('voice', payload, options);
+	};
+
 	this.sendSticker = function(chatId, sticker, options){
 		var payload = {
 			chat_id: chatId

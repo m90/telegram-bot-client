@@ -103,6 +103,14 @@ describe('TelegramBotClient', function(){
 			});
 		});
 
+		describe('#sendVoice(chatId, voiceReference[, options])', function(){
+			this.timeout(25000);
+			var client = new TelegramBotClient(TOKEN);
+			it('sends a voice message using a local file', function(){
+				return client.sendVoice(CHAT_ID, './test/fixtures/bluejay.ogg').promise();
+			});
+		});
+
 		describe('#sendDocument(chatId, documentReference[, options])', function(){
 			this.timeout(25000);
 			var client = new TelegramBotClient(TOKEN);
