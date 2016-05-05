@@ -163,6 +163,12 @@ unbans a previously kicked user
 answer callback queries sent by inline keyboards
 - callbackQueryId: the id of the callback query
 
+##### `#editMessageText([chat_id, ]identifier, text[, options])`
+edit a message's text
+- chat_id: the chat's id
+- identifier: message or inline message id
+- text: the updated text
+
 ### Additional methods:
 
 ##### `#delay(duration)`

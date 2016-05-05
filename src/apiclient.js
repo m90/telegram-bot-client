@@ -1,5 +1,6 @@
 var request = require('superagent');
 var Promise = require('promise');
+var _ = require('underscore');
 var util = require('./util');
 var isUrl = require('is-url');
 var fs = require('fs');
@@ -237,8 +238,22 @@ function ApiClient(token){
 		return _post('answerCallbackQuery', payload, options);
 	};
 
-	this.getUpdates = function(options){
-		return _get('getUpdates', {}, options);
+	this.editMessageText = function(/*[chatId,] identifier, text[, options]*/){
+		var args = _.toArray(arguments);
+		var payload = {}, options;
+		if (args.length < 4 && _.isString(arguments[0]) && _.isString(arguments[1])){
+			payload.inline_message_id = args[0];
+			payload.text = args[1];
+			options = args[2];
+		} else if (args.length > 2 && (!_.some(_.take(args, 3), _.isObject))){
+			payload.chat_id = args[0];
+			payload.message_id = args[1];
+			payload.text = args[2];
+			options = args[3];
+		} else {
+			return Promise.reject(new Error('Could not handle passed arguments'));
+		}
+		return _post('editMessageText', payload, options);
 	};
 
 	this.setWebhook = function(url){

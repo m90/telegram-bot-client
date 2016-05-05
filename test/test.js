@@ -4,7 +4,7 @@ var Promise = require('promise');
 var TelegramBotClient = require('./../index');
 
 var CHAT_ID = process.env.TELEGRAM_ID || 89149957;
-var TOKEN = process.env.TELEGRAM_TOKEN;
+var TOKEN = process.env.TELEGRAM_TOKEN || '114522183:AAGx28VBTUZ5iZMcPxTF2-d-dszTYnrBXsw';
 
 if (!TOKEN){
 	throw new Error('Please set TELEGRAM_TOKEN before running the tests!');
@@ -44,7 +44,7 @@ describe('TelegramBotClient', function(){
 		});
 	});
 
-	describe('Methods', function(){
+	describe('Standard Chat Methods', function(){
 
 		describe('#sendMessage(chatId, text[, options])', function(){
 			this.timeout(10000);
@@ -208,6 +208,20 @@ describe('TelegramBotClient', function(){
 
 		});
 
+	});
+
+	describe('Message Editing', function(){
+		describe('#editMessageText([chat_id, ]identifier, text[, options])', function(){
+			this.timeout(10000);
+			var client = new TelegramBotClient(TOKEN);
+			it('edits a sent message\'s text', function(){
+				return client.sendMessage(CHAT_ID, 'This message should not contain tpyos').promise().then(function(response){
+					return client.editMessageText(CHAT_ID, response.result.message_id, 'This message should not contain typos').promise().then(function(response){
+						assert(response.result.text.indexOf('typo') > -1);
+					});
+				});
+			});
+		});
 	});
 
 });
