@@ -163,21 +163,26 @@ unbans a previously kicked user
 answer callback queries sent by inline keyboards
 - callbackQueryId: the id of the callback query
 
-##### `#editMessageText([chat_id,] identifier, text[, options])`
+##### `#editMessageText([chatId,] identifier, text[, options])`
 edit a message's text
-- chat_id: the chat's id
+- chatId: the chat's id
 - identifier: message or inline message id
 - text: the updated text
 -
-##### `#editMessageCaption([chat_id,] identifier[, options])`
+##### `#editMessageCaption([chatId,] identifier[, options])`
 edit a message's caption
-- chat_id: the chat's id
+- chatId: the chat's id
 - identifier: message or inline message id
 
-##### `#editMessageReplyMarkup([chat_id,] identifier[, options])`
+##### `#editMessageReplyMarkup([chatId,] identifier[, options])`
 edit a message's reply markup
-- chat_id: the chat's id
+- chatId: the chat's id
 - identifier: message or inline message id
+-
+##### `#answerInlineQuery(inlineQueryId, results[, options])`
+ánswer an inline query
+- inlineQueryId: the inline query's id
+- results: a string containing a JSON version of the results in an array
 
 ### Additional methods:
 

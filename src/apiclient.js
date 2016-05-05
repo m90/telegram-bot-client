@@ -288,6 +288,14 @@ function ApiClient(token){
 		return _post('editMessageReplyMarkup', payload, options);
 	};
 
+	this.answerInlineQuery = function(inlineQueryId, results, options){
+		var payload = {
+			inline_query_id: inlineQueryId
+			, results: results
+		};
+		return _post('answerInlineQuery', payload, options);
+	};
+
 	this.setWebhook = function(url){
 		var payload = {
 			url:  url
