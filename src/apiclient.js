@@ -272,6 +272,22 @@ function ApiClient(token){
 		return _post('editMessageCaption', payload, options);
 	};
 
+	this.editMessageReplyMarkup = function(/*[chatId,] identifier[, options]*/){
+		var args = _.toArray(arguments);
+		var payload = {}, options;
+		if (args.length === 2 &&  _.every(args, _.isString)){
+			payload.inline_message_id = args[0];
+			options = args[1];
+		} else if (args.length > 1 && (!_.some(_.take(args, 2), _.isObject))){
+			payload.chat_id = args[0];
+			payload.message_id = args[1];
+			options = args[2];
+		} else {
+			return Promise.reject(new Error('Could not handle passed arguments'));
+		}
+		return _post('editMessageReplyMarkup', payload, options);
+	};
+
 	this.setWebhook = function(url){
 		var payload = {
 			url:  url

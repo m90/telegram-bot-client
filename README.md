@@ -174,6 +174,11 @@ edit a message's caption
 - chat_id: the chat's id
 - identifier: message or inline message id
 
+##### `#editMessageReplyMarkup([chat_id,] identifier[, options])`
+edit a message's reply markup
+- chat_id: the chat's id
+- identifier: message or inline message id
+
 ### Additional methods:
 
 ##### `#delay(duration)`
