@@ -137,7 +137,7 @@ sends a venue
 - lon: longitude
 - title: title of the venue
 - address: address of the venue
--
+
 ##### `#sendContact(chatId, phoneNumber, firstName[, options])`
 sends a contact
 - chatId: the chat's id
