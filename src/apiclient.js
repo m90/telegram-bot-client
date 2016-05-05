@@ -241,7 +241,7 @@ function ApiClient(token){
 	this.editMessageText = function(/*[chatId,] identifier, text[, options]*/){
 		var args = _.toArray(arguments);
 		var payload = {}, options;
-		if (args.length < 4 && _.isString(arguments[0]) && _.isString(arguments[1])){
+		if (args.length < 4 && _.isString(args[0]) && _.isString(args[1])){
 			payload.inline_message_id = args[0];
 			payload.text = args[1];
 			options = args[2];
@@ -254,6 +254,22 @@ function ApiClient(token){
 			return Promise.reject(new Error('Could not handle passed arguments'));
 		}
 		return _post('editMessageText', payload, options);
+	};
+
+	this.editMessageCaption = function(/*[chatId,] identifier[, options]*/){
+		var args = _.toArray(arguments);
+		var payload = {}, options;
+		if (args.length === 2 &&  _.every(args, _.isString)){
+			payload.inline_message_id = args[0];
+			options = args[1];
+		} else if (args.length > 1 && (!_.some(_.take(args, 2), _.isObject))){
+			payload.chat_id = args[0];
+			payload.message_id = args[1];
+			options = args[2];
+		} else {
+			return Promise.reject(new Error('Could not handle passed arguments'));
+		}
+		return _post('editMessageCaption', payload, options);
 	};
 
 	this.setWebhook = function(url){

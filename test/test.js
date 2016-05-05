@@ -222,6 +222,17 @@ describe('TelegramBotClient', function(){
 				});
 			});
 		});
+		describe('#editMessageCaption([chat_id, ]identifier[, options])', function(){
+			this.timeout(10000);
+			var client = new TelegramBotClient(TOKEN);
+			it('edits a sent message\'s caption', function(){
+				return client.sendPhoto(CHAT_ID, './test/fixtures/pizzacat.jpg', { caption: 'Pizza Cat?' }).promise().then(function(response){
+					return client.editMessageCaption(CHAT_ID, response.result.message_id, { caption: 'Pizza Cat!' }).promise().then(function(response){
+						assert(response.result.caption.indexOf('!') > -1);
+					});
+				});
+			});
+		});
 	});
 
 });
