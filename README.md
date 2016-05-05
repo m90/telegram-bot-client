@@ -159,6 +159,10 @@ unbans a previously kicked user
 - chatId: the chat's id
 - userId: the user id to unban
 
+##### `#answerCallbackQuery(callbackQueryId[, options])`
+answer callback queries sent by inline keyboards
+- callbackQueryId: the id of the callback query
+
 ### Additional methods:
 
 ##### `#delay(duration)`

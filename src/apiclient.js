@@ -230,6 +230,13 @@ function ApiClient(token){
 		return _post('unbanChatMember', payload);
 	};
 
+	this.answerCallbackQuery = function(callbackQueryId, options){
+		var payload = {
+			callback_query_id: callbackQueryId
+		};
+		return _post('answerCallbackQuery', payload, options);
+	};
+
 	this.getUpdates = function(options){
 		return _get('getUpdates', {}, options);
 	};
