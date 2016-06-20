@@ -12,7 +12,7 @@ $ npm install telegram-bot-client --save
 ```
 
 ### Usage
-**Important:** Please note that this client does not and will not support automated polling or listening to webhooks. This can be done much better by the application running the bot.
+**Important:** Please note that this client does not and will not support automated polling or listening to webhooks. This can be done much better by the application running the bot. If you are interested in how this might look like you can have a look at [telegram-bot-boilerplate](https://github.com/m90/telegram-bot-boilerplate).
 
 Instantiate a new client using your bot's token:
 
