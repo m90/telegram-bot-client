@@ -196,6 +196,15 @@ get the administrators of a chat
 get the number of members of a chat
 - chatId: the chat's id
 
+##### `#getChatMember(chatId, memberId)`
+get information on a member of a chat
+- chatId: the chat's id
+- userId: the chat's id
+
+##### `#leaveChat(chatId)`
+leave a chat
+- chatId: the chat's id
+
 ### Additional methods:
 
 ##### `#delay(duration)`
