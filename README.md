@@ -191,6 +191,10 @@ get information on a chat
 ##### `#getChatAdministrators(chatId)`
 get the administrators of a chat
 - chatId: the chat's id
+-
+##### `#getChatMembersCount(chatId)`
+get the number of members of a chat
+- chatId: the chat's id
 
 ### Additional methods:
 

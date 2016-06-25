@@ -190,9 +190,20 @@ describe('TelegramBotClient', function(){
 			this.timeout(10000);
 			var client = new TelegramBotClient(TOKEN);
 			it('gets infos about the bot', function(){
-				return client.getChat(CHAT_ID).promise().then(function(res){
+				return client.getChatAdministrators(CHAT_ID).promise().then(function(res){
 					assert(res.result);
 					assert(Array.isArray(res.result));
+				});
+			});
+		});
+
+		describe('#getChatMembersCount(chatId)', function(){
+			this.timeout(10000);
+			var client = new TelegramBotClient(TOKEN);
+			it('gets infos about the bot', function(){
+				return client.getChatMembersCount(CHAT_ID).promise().then(function(res){
+					assert(res.result);
+					assert(isFinite(res.result));
 				});
 			});
 		});
