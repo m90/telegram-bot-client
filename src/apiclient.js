@@ -229,11 +229,19 @@ function ApiClient(token){
 		return _get('getChatAdministrators', payload);
 	};
 
-	this.getChatMembersCount =  function(chatId){
+	this.getChatMembersCount = function(chatId){
 		var payload = {
 			chat_id: chatId
 		};
 		return _get('getChatMembersCount', payload);
+	};
+
+	this.getChatMember = function(chatId, userId){
+		var payload = {
+			chat_id: chatId
+			, user_id: userId
+		};
+		return _get('getChatMember', payload);
 	};
 
 	this.kickChatMember = function(chatId, userId){
