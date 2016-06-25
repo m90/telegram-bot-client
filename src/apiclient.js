@@ -215,6 +215,13 @@ function ApiClient(token){
 		return _get('getMe', {});
 	};
 
+	this.getChat = function(chatId){
+		var payload = {
+			chat_id: chatId
+		};
+		return _get('getChat', payload);
+	};
+
 	this.kickChatMember = function(chatId, userId){
 		var payload = {
 			chat_id: chatId

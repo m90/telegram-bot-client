@@ -180,9 +180,13 @@ edit a message's reply markup
 - identifier: message or inline message id
 
 ##### `#answerInlineQuery(inlineQueryId, results[, options])`
-ánswer an inline query
+answer an inline query
 - inlineQueryId: the inline query's id
 - results: a string containing a JSON version of the results in an array
+
+##### `getChat(chatId)`
+get information on a chat
+- chatId: the chat's id
 
 ### Additional methods:
 

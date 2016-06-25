@@ -176,6 +176,16 @@ describe('TelegramBotClient', function(){
 			});
 		});
 
+		describe('#getChat()', function(){
+			this.timeout(10000);
+			var client = new TelegramBotClient(TOKEN);
+			it('gets infos about the bot', function(){
+				return client.getChat(CHAT_ID).promise().then(function(res){
+					assert(res.result.id);
+				});
+			});
+		});
+
 		describe('#getUpdates([options])', function(){
 			this.timeout(10000);
 			var client = new TelegramBotClient(TOKEN);
