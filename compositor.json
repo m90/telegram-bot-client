@@ -1,0 +1,95 @@
+{
+  "name": "m90/telegram-bot-client",
+  "version": "0.1.4",
+  "libraries": {
+    "xv": "^1.1.25"
+  },
+  "title": "",
+  "branch": "",
+  "style": {
+    "name": "Brutalist",
+    "componentSet": {
+      "nav": "nav/BasicNav",
+      "header": "header/BasicHeader",
+      "article": "article/MarkdownArticle",
+      "footer": "footer/BasicFooter"
+    },
+    "fontFamily": "Consolas, \"Liberation Mono\", Menlo, Courier, monospace",
+    "heading": {},
+    "typeScale": [
+      48,
+      32,
+      20,
+      18,
+      16,
+      14,
+      12
+    ],
+    "layout": {
+      "maxWidth": 1024,
+      "fluid": true
+    },
+    "colors": {
+      "text": "#333",
+      "background": "#fff",
+      "primary": "#666",
+      "secondary": "#888",
+      "highlight": "#1f80ff",
+      "muted": "#f6f6f6",
+      "border": "#eee"
+    }
+  },
+  "content": [
+    {
+      "component": "nav",
+      "links": [
+        {
+          "href": "https://github.com/m90/telegram-bot-client",
+          "text": "GitHub"
+        },
+        {
+          "href": "https://npmjs.com/package/telegram-bot-client",
+          "text": "npm"
+        }
+      ]
+    },
+    {
+      "component": "header",
+      "heading": "telegram-bot-client",
+      "subhead": "Node.js client for the Telegram messenger Bot API",
+      "children": [
+        {
+          "component": "ui/TweetButton",
+          "text": "telegram-bot-client: Node.js client for the Telegram messenger Bot API",
+          "url": ""
+        },
+        {
+          "component": "ui/GithubButton",
+          "user": "m90",
+          "repo": "telegram-bot-client"
+        }
+      ],
+      "text": "v1.4.0"
+    },
+    {
+      "component": "article",
+      "metadata": {
+        "source": "github.readme"
+      },
+      "html": "\n<p><a href=\"https://travis-ci.org/m90/telegram-bot-client\"><img src=\"https://travis-ci.org/m90/telegram-bot-client.svg?branch=master\"></a></p>\n<blockquote>\n<p>node.js client for the <a href=\"https://core.telegram.org/bots/api\">Telegram messenger Bot API</a></p>\n</blockquote>\n<h3>Installation</h3>\n<p>Install via npm:</p>\n<pre>$ npm install telegram-bot-client --save</pre><h3>Usage</h3>\n<p><strong>Important:</strong> Please note that this client does not and will not support automated polling or listening to webhooks. This can be done much better by the application running the bot. If you are interested in how this might look like you can have a look at <a href=\"https://github.com/m90/telegram-bot-boilerplate\">telegram-bot-boilerplate</a>.</p>\n<p>Instantiate a new client using your bot&apos;s token:</p>\n<pre><span class=\"hljs-keyword\">var</span> TelegramBotClient = <span class=\"hljs-built_in\">require</span>(<span class=\"hljs-string\">&apos;telegram-bot-client&apos;</span>);\n<span class=\"hljs-keyword\">var</span> client = <span class=\"hljs-keyword\">new</span> TelegramBotClient(MY_TOKEN);\nclient.sendMessage(CHAT_ID, <span class=\"hljs-string\">&apos;I\\&apos;m a bot, so what?&apos;</span>);</pre><p>All methods on the client are chainable and will wait for the previous operations to finish:</p>\n<pre>client\n    .sendMessage(CHAT_ID, <span class=\"hljs-string\">&apos;Hi!&apos;</span>)\n    .sendMessage(CHAT_ID, <span class=\"hljs-string\">&apos;How are you?&apos;</span>)\n    .sendMessage(CHAT_ID, <span class=\"hljs-string\">&apos;Be right back!&apos;</span>)\n    .delay(<span class=\"hljs-number\">25000</span>)\n    .sendMessage(CHAT_ID, <span class=\"hljs-string\">&apos;Back!&apos;</span>)\n    .sendMessage(CHAT_ID, <span class=\"hljs-string\">&apos;Wait, I want to show you something, where is it?&apos;</span>)\n    .delay(<span class=\"hljs-number\">7500</span>)\n    .sendPhoto(CHAT_ID, SOME_URL_POINTING_TO_A_PHOTO)\n    .sendMessage(CHAT_ID, <span class=\"hljs-string\">&apos;How do you like it?&apos;</span>)\n    .catch(<span class=\"hljs-function\"><span class=\"hljs-keyword\">function</span>(<span class=\"hljs-params\">err</span>)</span>{\n        <span class=\"hljs-comment\">// all errors ocurring in the above call chain</span>\n        <span class=\"hljs-comment\">// will be passed down to this handler</span>\n        <span class=\"hljs-built_in\">console</span>.log(err);\n    });</pre><p>If you want to consume the response you can unwrap the chain using the <code>.promise()</code> method:</p>\n<pre>client\n    .sendMessage(CHAT_ID, <span class=\"hljs-string\">&apos;Did this really work?&apos;</span>)\n    .promise()\n    .then(<span class=\"hljs-function\"><span class=\"hljs-keyword\">function</span>(<span class=\"hljs-params\">response</span>)</span>{\n        <span class=\"hljs-built_in\">console</span>.log(response);\n    }, <span class=\"hljs-function\"><span class=\"hljs-keyword\">function</span>(<span class=\"hljs-params\">err</span>)</span>{\n        <span class=\"hljs-built_in\">console</span>.log(err);\n    });</pre><h3>Passing optional arguments:</h3>\n<p>All methods are following the same convention: Required arguments are passed seperately, all optional parameters can be wrapped into an object and be supplied as the method&apos;s last argument:</p>\n<pre><span class=\"hljs-keyword\">var</span> messageText = <span class=\"hljs-string\">&apos;Look at this: https://www.youtube.com/watch?v=qb_hqexKkw8&apos;</span>;\n<span class=\"hljs-keyword\">var</span> opts = { <span class=\"hljs-attr\">disable_web_page_preview</span>: <span class=\"hljs-literal\">true</span> };\nclient.sendMessage(CHAT_ID, messageText, opts);</pre><h3>Available methods:</h3>\n<p>All <a href=\"https://core.telegram.org/bots/api#available-methods\">methods described by the API docs</a> are present on the client.</p>\n<h5><code>#getMe()</code></h5>\n<p>gets info on the bot</p>\n<h5><code>#getUpdates([options])</code></h5>\n<p>gets updates (messages) sent to the bot</p>\n<h5><code>#getUserProfilePhotos(userId[, options])</code></h5>\n<p>gets a user&apos;s profile photos</p>\n<ul>\n<li>userId: the user&apos;s id</li>\n</ul>\n<h5><code>#setWebhook(url)</code></h5>\n<p>sets or removes the webhook url to use</p>\n<ul>\n<li>url: the url, to remove the webhook pass <code>&apos;&apos;</code></li>\n</ul>\n<h5><code>#sendMessage(chatId, text[, options])</code></h5>\n<p>sends a message</p>\n<ul>\n<li>chatId: the chat&apos;s id</li>\n<li>text: the message to send</li>\n</ul>\n<h5><code>#forwardMessage(chatId, fromChatId, messageId)</code></h5>\n<p>forwards a message</p>\n<ul>\n<li>chatId: the chat&apos;s id</li>\n<li>fromChatId: the id of the chat the message is forwarded from</li>\n<li>messageId: the message&apos;s id</li>\n</ul>\n<h5><code>#sendPhoto(chatId, photoReference[, options])</code></h5>\n<p>sends a photo</p>\n<ul>\n<li>chatId: the chat&apos;s id</li>\n<li>photoReference: this can be a local file path, a URL or a telegram file id</li>\n</ul>\n<h5><code>#sendAudio(chatId, audioReference[, options])</code></h5>\n<p>sends audio</p>\n<ul>\n<li>chatId: the chat&apos;s id</li>\n<li>audioReference: this can be a local file path, a URL or a telegram file id</li>\n</ul>\n<h5><code>#sendVoice(chatId, voiceReference[, options])</code></h5>\n<p>sends audio</p>\n<ul>\n<li>chatId: the chat&apos;s id</li>\n<li>voiceReference: this can be a local file path or a telegram file id</li>\n</ul>\n<h5><code>#sendDocument(chatId, documentReference[, options])</code></h5>\n<p>sends a document</p>\n<ul>\n<li>chatId: the chat&apos;s id</li>\n<li>documentReference: this can be a local file path, a URL or a telegram file id</li>\n</ul>\n<h5><code>#sendSticker(chatId, stickerReference[, options])</code></h5>\n<p>sends a sticker</p>\n<ul>\n<li>chatId: the chat&apos;s id</li>\n<li>stickerReference: this can be a local file path, a URL or a telegram file id</li>\n</ul>\n<h5><code>#sendVideo(chatId, videoReference[, options])</code></h5>\n<p>sends video</p>\n<ul>\n<li>chatId: the chat&apos;s id</li>\n<li>videoReference: this can be a local file path, a URL or a telegram file id</li>\n</ul>\n<h5><code>#sendLocation(chatId, lat, lon[, options])</code></h5>\n<p>sends a location</p>\n<ul>\n<li>chatId: the chat&apos;s id</li>\n<li>lat: latitude</li>\n<li>lon: longitude</li>\n</ul>\n<h5><code>#sendVenue(chatId, lat, lon, title, address[, options])</code></h5>\n<p>sends a venue</p>\n<ul>\n<li>chatId: the chat&apos;s id</li>\n<li>lat: latitude</li>\n<li>lon: longitude</li>\n<li>title: title of the venue</li>\n<li>address: address of the venue</li>\n</ul>\n<h5><code>#sendContact(chatId, phoneNumber, firstName[, options])</code></h5>\n<p>sends a contact</p>\n<ul>\n<li>chatId: the chat&apos;s id</li>\n<li>phoneNumber: the contact&apos;s phone number</li>\n<li>firstName: the contact&apos;s first name</li>\n</ul>\n<h5><code>#sendChatAction(chatId, action)</code></h5>\n<p>sends a chat action</p>\n<ul>\n<li>chatId: the chat&apos;s id</li>\n<li>action: the action to send</li>\n</ul>\n<h5><code>#kickChatMember(chatId, userId)</code></h5>\n<p>kicks a user from a chat</p>\n<ul>\n<li>chatId: the chat&apos;s id</li>\n<li>userId: the user id to ban</li>\n</ul>\n<h5><code>#unbanChatMember(chatId, userId)</code></h5>\n<p>unbans a previously kicked user</p>\n<ul>\n<li>chatId: the chat&apos;s id</li>\n<li>userId: the user id to unban</li>\n</ul>\n<h5><code>#answerCallbackQuery(callbackQueryId[, options])</code></h5>\n<p>answer callback queries sent by inline keyboards</p>\n<ul>\n<li>callbackQueryId: the id of the callback query</li>\n</ul>\n<h5><code>#editMessageText([chatId,] identifier, text[, options])</code></h5>\n<p>edit a message&apos;s text</p>\n<ul>\n<li>chatId: the chat&apos;s id</li>\n<li>identifier: message or inline message id</li>\n<li>text: the updated text</li>\n</ul>\n<h5><code>#editMessageCaption([chatId,] identifier[, options])</code></h5>\n<p>edit a message&apos;s caption</p>\n<ul>\n<li>chatId: the chat&apos;s id</li>\n<li>identifier: message or inline message id</li>\n</ul>\n<h5><code>#editMessageReplyMarkup([chatId,] identifier[, options])</code></h5>\n<p>edit a message&apos;s reply markup</p>\n<ul>\n<li>chatId: the chat&apos;s id</li>\n<li>identifier: message or inline message id</li>\n</ul>\n<h5><code>#answerInlineQuery(inlineQueryId, results[, options])</code></h5>\n<p>answer an inline query</p>\n<ul>\n<li>inlineQueryId: the inline query&apos;s id</li>\n<li>results: a string containing a JSON version of the results in an array</li>\n</ul>\n<h5><code>#getChat(chatId)</code></h5>\n<p>get information on a chat</p>\n<ul>\n<li>chatId: the chat&apos;s id</li>\n</ul>\n<h5><code>#getChatAdministrators(chatId)</code></h5>\n<p>get the administrators of a chat</p>\n<ul>\n<li>chatId: the chat&apos;s id</li>\n</ul>\n<h5><code>#getChatMembersCount(chatId)</code></h5>\n<p>get the number of members of a chat</p>\n<ul>\n<li>chatId: the chat&apos;s id</li>\n</ul>\n<h5><code>#getChatMember(chatId, memberId)</code></h5>\n<p>get information on a member of a chat</p>\n<ul>\n<li>chatId: the chat&apos;s id</li>\n<li>userId: the chat&apos;s id</li>\n</ul>\n<h5><code>#leaveChat(chatId)</code></h5>\n<p>leave a chat</p>\n<ul>\n<li>chatId: the chat&apos;s id</li>\n</ul>\n<h3>Additional methods:</h3>\n<h5><code>#delay(duration)</code></h5>\n<p>pauses the queue for the give duration</p>\n<ul>\n<li>duration: the time to pause in ms</li>\n</ul>\n<h5><code>#promise()</code></h5>\n<p>unwraps the chain and returns a promise for the last operation</p>\n<h5><code>#then(successHandler, errorHandler)</code></h5>\n<p>exposes the last operation&apos;s result via a promise interface</p>\n<ul>\n<li>successHandler: handler being passed the result</li>\n<li>errorHandler: handler being passed the error</li>\n</ul>\n<h5><code>#catch(handler)</code></h5>\n<p>handles errors occured in the chain</p>\n<ul>\n<li>handler: error handler function</li>\n</ul>\n<h3>License</h3>\n<p>MIT &#xA9; <a href=\"http://www.frederikring.com\">Frederik Ring</a></p>\n"
+    },
+    {
+      "component": "footer",
+      "links": [
+        {
+          "href": "https://github.com/m90/telegram-bot-client",
+          "text": "GitHub"
+        },
+        {
+          "href": "https://github.com/m90",
+          "text": "m90"
+        }
+      ]
+    }
+  ]
+}
