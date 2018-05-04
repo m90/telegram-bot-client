@@ -28,7 +28,7 @@ function TelegramBotClient(token, promise){
 
 	this.delay = function(ms){
 		return new TelegramBotClient(token, promise.then(function(){
-			return new Promise(function(resolve, reject){
+			return new Promise(function(resolve){
 				setTimeout(resolve, ms);
 			});
 		}));

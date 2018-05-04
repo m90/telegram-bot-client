@@ -92,7 +92,7 @@ function ApiClient(token){
 						reject(res.text);
 					}
 					if (data[1]){
-						fs.unlink(data[0]);
+						fs.unlink(data[0], Function.prototype);
 					}
 				});
 			}, function(err){
