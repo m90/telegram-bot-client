@@ -22,7 +22,7 @@ function ApiClient(token){
 					if (res.ok) {
 						resolve(res.body);
 					} else {
-						reject(res.text);
+						reject(new Error(res.body.description));
 					}
 				});
 		});
@@ -38,7 +38,7 @@ function ApiClient(token){
 					if (res.ok) {
 						resolve(res.body);
 					} else {
-						reject(res.text);
+						reject(new Error(res.body.description));
 					}
 				});
 		});
@@ -89,7 +89,7 @@ function ApiClient(token){
 					if (res.ok) {
 						resolve(res.body);
 					} else {
-						reject(res.text);
+						reject(new Error(res.body.description));
 					}
 					if (data[1]){
 						fs.unlink(data[0], Function.prototype);
