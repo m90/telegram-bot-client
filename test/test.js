@@ -149,7 +149,7 @@ describe('TelegramBotClient', function(){
 			});
 		});
 
-		describe('#sendContact(chatId, phoneNumber, firstName[, options])', function(){
+		describe.skip('#sendContact(chatId, phoneNumber, firstName[, options])', function(){
 			this.timeout(10000);
 			var client = new TelegramBotClient(TOKEN);
 			it('sends a contact', function(){
