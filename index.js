@@ -1,4 +1,3 @@
-var Promise = require('promise');
 var ApiClient = require('./src/apiclient');
 
 function TelegramBotClient(token, promise){

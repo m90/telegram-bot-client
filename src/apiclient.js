@@ -1,6 +1,4 @@
 var request = require('superagent');
-var Promise = require('promise');
-var _ = require('underscore');
 var util = require('./util');
 var isUrl = require('is-url');
 var fs = require('fs');
@@ -8,6 +6,12 @@ var tempfile = require('tempfile');
 var format = require('fr');
 
 var endpoint = 'https://api.telegram.org/bot{0}/{1}';
+
+function is(type) {
+	return function(el) {
+		return Object.prototype.toString.call(el) === '[object ' + type + ']';
+	};
+}
 
 function ApiClient(token){
 
@@ -275,13 +279,14 @@ function ApiClient(token){
 	};
 
 	this.editMessageText = function(/*[chatId,] identifier, text[, options]*/){
-		var args = _.toArray(arguments);
+		var args = [].slice.call(arguments);
 		var payload = {}, options;
-		if (args.length < 4 && _.isString(args[0]) && _.isString(args[1])){
+		if (args.length < 4 && is('String')(args[0]) && is('String')(args[1])){
 			payload.inline_message_id = args[0];
 			payload.text = args[1];
 			options = args[2];
-		} else if (args.length > 2 && (!_.some(_.take(args, 3), _.isObject))){
+
+		} else if (args.length > 2 && (!args.slice(0, 3).some(is('Object')))){
 			payload.chat_id = args[0];
 			payload.message_id = args[1];
 			payload.text = args[2];
@@ -293,12 +298,12 @@ function ApiClient(token){
 	};
 
 	this.editMessageCaption = function(/*[chatId,] identifier[, options]*/){
-		var args = _.toArray(arguments);
+		var args = [].slice.call(arguments);
 		var payload = {}, options;
-		if (args.length === 2 &&  _.every(args, _.isString)){
+		if (args.length === 2 &&  args.every(is('String'))){
 			payload.inline_message_id = args[0];
 			options = args[1];
-		} else if (args.length > 1 && (!_.some(_.take(args, 2), _.isObject))){
+		} else if (args.length > 1 && (!args.slice(0, 2).some(is('Object')))){
 			payload.chat_id = args[0];
 			payload.message_id = args[1];
 			options = args[2];
@@ -309,12 +314,12 @@ function ApiClient(token){
 	};
 
 	this.editMessageReplyMarkup = function(/*[chatId,] identifier[, options]*/){
-		var args = _.toArray(arguments);
+		var args = [].slice.call(arguments);
 		var payload = {}, options;
-		if (args.length === 2 &&  _.every(args, _.isString)){
+		if (args.length === 2 &&  args.every(is('String'))) {
 			payload.inline_message_id = args[0];
 			options = args[1];
-		} else if (args.length > 1 && (!_.some(_.take(args, 2), _.isObject))){
+		} else if (args.length > 1 && (!args.slice(0, 2).some(is('Object')))){
 			payload.chat_id = args[0];
 			payload.message_id = args[1];
 			options = args[2];

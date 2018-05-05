@@ -23,5 +23,6 @@
     , "module" : true
     , "describe" : true
     , "it" : true
+    , "Promise": true
   }
 }
