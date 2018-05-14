@@ -2,7 +2,7 @@ var assert = require('assert');
 
 var TelegramBotClient = require('./../index');
 
-var CHAT_ID = process.env.TELEGRAM_ID || 89149957;
+var CHAT_ID = process.env.TELEGRAM_ID;
 var TOKEN = process.env.TELEGRAM_TOKEN;
 
 if (!TOKEN){

@@ -1,6 +1,12 @@
 language: node_js
 node_js:
-  - "4"
-  - "6"
-  - "8"
+- '4'
+- '6'
+- '8'
+- '10'
 sudo: false
+env:
+  global:
+    - TELEGRAM_ID=89149957
+  matrix:
+    secure: aCg+WKO5YDIHKESGGDb6Bda7SfX+nZOivTYnp1jyAiSsXcPe9LepEW0SKrst4GNbTM65NqsZYbdSTQ1zWIM5TjtEPUWLcyrTr3Sek7WrzhegLN3dUuW/rGyJ2KAbpx8fo2mu29DDEuWWnJTsu1LJQHwjW6STfxQ9A1op1jUzz8XkhISlLgK/6cupcp7KzmSpBm7CKn4DCvB8q+QXyzsP8WBKWjfvm7saKpFhAX+PVsDM+6ebuPHzSVVDuv7YAMRQt7VukxwqFL6JxDtkUsS+mGTcjpnRTuftwGtlpOuRaVoH6OL3+yE+nG9NkK9ESs7iWKZQCnelVgVO0Tdy/CG+pxj8eWKeDFCT0QDz3ZwHrF7sluN+BwBoxBkePWR/k6s4Spd1EaGV1UfeP1OqjpqT88bigF1zv2UTk71B4eiDfI/arYjxBlkIyZddTCLexP/Gc0LNCep09v13T7EqqxZjReze+Tup5D0/4P74NNIXrC/gp0IEc5O9qnUpRbGvrbFSRJNd2r+HEoHt++D1YiG9Z88FbvlIy6OmMpVKlVEWjG0oSzTLC+BIfpc/YqGjCBasaBzMHkOmVWGm+Amcp72LBms+G1I8QvGtTu3ljDjvDc7qgnjgGVFTpOQa7FsGxkysDLz1HC4G1s7pjbiSQ7lS515RyKwhkLpk+E27iO5e61I=
