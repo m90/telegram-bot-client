@@ -215,6 +215,10 @@ set a new profile photo for the chat.
 - chatId: the chat's id
 - photo: the New chat photo
 
+##### `#deleteChatPhoto(chatId)`
+delete the chat photo
+- chatId: the chat's id
+
 ### Additional methods:
 
 ##### `#delay(duration)`

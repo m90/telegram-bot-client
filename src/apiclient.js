@@ -363,6 +363,13 @@ function ApiClient(token){
 		return _postMedia('photo', payload, options, 'setChatPhoto');
 	};
 
+	this.deleteChatPhoto = function(chatId){
+		var payload = {
+			chat_id: chatId
+		};
+		return _post('deleteChatPhoto', payload);
+	};
+
 }
 
 
