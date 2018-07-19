@@ -238,6 +238,11 @@ pin a message in a supergroup or a channel.
 unpin a message in a supergroup or a channel.
 - chatId: the chat's id
 
+##### `#restrictChatMember(chatId, userId[, options])`
+restrict a user in a supergroup
+- chatId: the chat's id of the supergroup
+- userId: unique identifier of the target user
+
 
 ### Additional methods:
 

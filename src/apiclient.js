@@ -401,6 +401,14 @@ function ApiClient(token){
 		return _post('unpinChatMessage', payload);
 	};
 
+	this.restrictChatMember = function(chatId, userId, options){
+		var payload = {
+			chat_id: chatId,
+			user_id: userId
+		};
+		return _post('restrictChatMember', payload, options);
+	};
+
 
 }
 
