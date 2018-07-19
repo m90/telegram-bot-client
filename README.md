@@ -188,6 +188,11 @@ answer an inline query
 get information on a chat
 - chatId: the chat's id
 
+##### `#exportChatInviteLink(chatId)`
+generate & return a new invite link for a chat. Any previously generated link is revoked
+- chatId: the chat's id
+
+
 ##### `#getChatAdministrators(chatId)`
 get the administrators of a chat
 - chatId: the chat's id

@@ -226,6 +226,14 @@ function ApiClient(token){
 		return _get('getChat', payload);
 	};
 
+	this.exportChatInviteLink = function(chatId){
+		var payload = {
+			chat_id: chatId
+		};
+		return _get('exportChatInviteLink', payload);
+	};
+
+
 	this.getChatAdministrators = function(chatId){
 		var payload = {
 			chat_id: chatId
