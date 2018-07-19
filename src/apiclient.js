@@ -409,6 +409,14 @@ function ApiClient(token){
 		return _post('restrictChatMember', payload, options);
 	};
 
+	this.promoteChatMember = function(chatId, userId, options){
+		var payload = {
+			chat_id: chatId,
+			user_id: userId
+		};
+		return _post('promoteChatMember', payload, options);
+	};
+
 
 }
 
