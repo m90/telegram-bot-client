@@ -48,11 +48,10 @@ function ApiClient(token){
 		});
 	}
 
-	function _postMedia(type, payload, options){
+	function _postMedia(type, payload, options, api_method){
 		return new Promise(function(resolve, reject){
-			var
-			method = format('{0}{1}{2}', 'send', type[0].toUpperCase(), type.substr(1, type.length -1))
-			, r = request
+			var method = api_method || format('{0}{1}{2}', 'send', type[0].toUpperCase(), type.substr(1, type.length -1)),
+			r = request
 				.post(format(endpoint, token, method))
 				.field('chat_id', payload.chat_id)
 			, mediaData = new Promise(function(resolve, reject){
@@ -354,6 +353,14 @@ function ApiClient(token){
 
 	this.getUpdates = function(options){
 		return _get('getUpdates', null, options);
+	};
+
+	this.setChatPhoto = function(chatId, photo, options){
+		var payload = {
+			chat_id: chatId
+			, media: photo
+		};
+		return _postMedia('photo', payload, options, 'setChatPhoto');
 	};
 
 }
