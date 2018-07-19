@@ -224,6 +224,12 @@ change the title of a chat
 - chatId: the chat's id
 - title: new chat title
 
+##### `#setChatDescription(chatId, description)`
+change the description of a chat
+- chatId: the chat's id
+- description: new chat description
+
+
 ### Additional methods:
 
 ##### `#delay(duration)`

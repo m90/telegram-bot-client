@@ -378,6 +378,14 @@ function ApiClient(token){
 		return _post('setChatTitle', payload);
 	};
 
+	this.setChatDescription = function(chatId, description){
+		var payload = {
+			chat_id: chatId,
+			description: description
+		};
+		return _post('setChatDescription', payload);
+	};
+
 }
 
 
