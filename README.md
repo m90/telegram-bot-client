@@ -229,6 +229,11 @@ change the description of a chat
 - chatId: the chat's id
 - description: new chat description
 
+##### `#pinChatMessage(chatId, identifier[, options])`
+pin a message in a supergroup or a channel.
+- chatId: the chat's id
+- identifier: identifier of the message to pin
+
 
 ### Additional methods:
 

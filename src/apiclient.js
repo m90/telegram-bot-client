@@ -386,6 +386,15 @@ function ApiClient(token){
 		return _post('setChatDescription', payload);
 	};
 
+	this.pinChatMessage = function(chatId, identifier, option){
+		var payload = {
+			chat_id: chatId,
+			message_id: identifier
+		};
+		return _post('pinChatMessage', payload, option);
+	};
+
+
 }
 
 
