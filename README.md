@@ -219,11 +219,6 @@ set a new profile photo for the chat.
 delete the chat photo
 - chatId: the chat's id
 
-##### `#setChatTitle(chatId, title)`
-change the title of a chat
-- chatId: the chat's id
-- title: new chat title
-
 ### Additional methods:
 
 ##### `#delay(duration)`
