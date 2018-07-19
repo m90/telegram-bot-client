@@ -234,6 +234,10 @@ pin a message in a supergroup or a channel.
 - chatId: the chat's id
 - identifier: identifier of the message to pin
 
+##### `#unpinChatMessage(chatId)`
+unpin a message in a supergroup or a channel.
+- chatId: the chat's id
+
 
 ### Additional methods:
 

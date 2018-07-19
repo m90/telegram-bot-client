@@ -394,6 +394,13 @@ function ApiClient(token){
 		return _post('pinChatMessage', payload, option);
 	};
 
+	this.unpinChatMessage = function(chatId){
+		var payload = {
+			chat_id: chatId
+		};
+		return _post('unpinChatMessage', payload);
+	};
+
 
 }
 
