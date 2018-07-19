@@ -370,6 +370,14 @@ function ApiClient(token){
 		return _post('deleteChatPhoto', payload);
 	};
 
+	this.setChatTitle = function(chatId, title){
+		var payload = {
+			chat_id: chatId,
+			title: title
+		};
+		return _post('setChatTitle', payload);
+	};
+
 }
 
 
