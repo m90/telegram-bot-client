@@ -28,7 +28,6 @@
     "eslint": "^5.4.0",
     "eslint-plugin-node": "^7.0.1",
     "if-env": "^1.0.4",
-    "jshint": "^2.8.0",
     "mocha": "^5.2.0"
   },
   "dependencies": {
@@ -46,9 +45,18 @@
       "mocha": true
     },
     "rules": {
-      "comma-style": [2, "last"],
-      "space-before-function-paren": [2, "always"],
-      "brace-style": [2, "1tbs"],
+      "comma-style": [
+        2,
+        "last"
+      ],
+      "space-before-function-paren": [
+        2,
+        "always"
+      ],
+      "brace-style": [
+        2,
+        "1tbs"
+      ],
       "space-before-blocks": 2
     }
   }
