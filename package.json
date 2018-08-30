@@ -4,7 +4,8 @@
   "description": "Client library for the Telegram messenger Bot API",
   "main": "index.js",
   "scripts": {
-    "pretest": "jshint .",
+    "pretest": "eslint .",
+    "fix": "eslint . --fix",
     "test": "if-env TRAVIS_PULL_REQUEST=true && echo 'Skipping tests for pull requests...' || mocha"
   },
   "repository": {
@@ -24,8 +25,9 @@
   },
   "homepage": "https://github.com/m90/telegram-bot-client#readme",
   "devDependencies": {
+    "eslint": "^5.4.0",
+    "eslint-plugin-node": "^7.0.1",
     "if-env": "^1.0.4",
-    "jshint": "^2.8.0",
     "mocha": "^5.2.0"
   },
   "dependencies": {
@@ -33,5 +35,29 @@
     "is-url": "^1.2.1",
     "superagent": "^3.8.3",
     "tempfile": "^1.1.1"
+  },
+  "eslintConfig": {
+    "extends": [
+      "eslint:recommended",
+      "plugin:node/recommended"
+    ],
+    "env": {
+      "mocha": true
+    },
+    "rules": {
+      "comma-style": [
+        2,
+        "last"
+      ],
+      "space-before-function-paren": [
+        2,
+        "always"
+      ],
+      "brace-style": [
+        2,
+        "1tbs"
+      ],
+      "space-before-blocks": 2
+    }
   }
 }
