@@ -48,45 +48,63 @@ function ApiClient (token) {
 		});
 	}
 
-	function _postMedia (type, payload, options) {
+	function _fetchMedia (mediaLocation) {
 		return new Promise(function (resolve, reject) {
-			var
-			method = format('{0}{1}{2}', 'send', type[0].toUpperCase(), type.substr(1, type.length -1)),
-			r = request
-				.post(format(endpoint, token, method))
-				.field('chat_id', payload.chat_id),
-			mediaData = new Promise(function (resolve, reject) {
-				if (isUrl(payload.media)) {
-					request
-						.get(payload.media)
-						.end(function (err, res) {
-							var tmpPath = tempfile(res.header['content-type'].split('/')[1]);
-							if (err) {
-								reject(err);
-								return;
-							}
-							fs.writeFile(tmpPath, res.body, function (err) {
-								if (err) {
-									reject(err);
-								} else {
-									resolve([tmpPath, true]);
-								}
-							});
-						});
-				} else {
-					resolve([payload.media, false]);
-				}
-			});
-			for (var key in options) {
-				if (options.hasOwnProperty(key)) {
-					r.field(key, options[key]);
-				}
+			request
+				.get(mediaLocation)
+				.end(function (err, res) {
+					if (err) {
+						reject(err);
+						return;
+					}
+
+					var tmpPath = tempfile(res.header['content-type'].split('/')[1]);
+					fs.writeFile(tmpPath, res.body, function (err) {
+						if (err) {
+							reject(err);
+						} else {
+							resolve(tmpPath);
+						}
+					});
+				});
+		});
+	}
+
+	function _postMedia (type, payload, options, apiMethod) {
+		return new Promise(function (resolve, reject) {
+			if (!apiMethod) {
+				apiMethod = format(
+					'{0}{1}{2}',
+					'send',
+					type[0].toUpperCase(),
+					type.substr(1, type.length -1)
+				);
 			}
+
+			var r = request
+				.post(format(endpoint, token, apiMethod))
+				.field('chat_id', payload.chat_id);
+
+			var mediaData = isUrl(payload.media)
+				? _fetchMedia(payload.media).then(function (data) {
+					return [data, true];
+				})
+				: Promise.resolve([payload.media, false])
+
+			if (options) {
+				Object.keys(options).forEach(function (key) {
+					r.field(key, options[key]);
+				});
+			}
+
 			mediaData.then(function (data) {
+				var media = data[0];
+				var unlink = data[1];
+
 				if (util.isFileId(data)) {
-					r.field(type, data[0]);
+					r.field(type, media);
 				} else {
-					r.attach(type, data[0]);
+					r.attach(type, media);
 				}
 
 				r.end(function (err, res) {
@@ -95,8 +113,8 @@ function ApiClient (token) {
 					} else {
 						reject(new Error(res.body.description));
 					}
-					if (data[1]) {
-						fs.unlink(data[0], Function.prototype);
+					if (unlink) {
+						fs.unlink(media, Function.prototype);
 					}
 				});
 			}, function (err) {
@@ -349,6 +367,5 @@ function ApiClient (token) {
 	};
 
 }
-
 
 module.exports = ApiClient;
