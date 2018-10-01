@@ -23,11 +23,15 @@ function ApiClient (token) {
 				.send(payload || {})
 				.send(options || {})
 				.end(function (err, res) {
-					if (res.ok) {
-						resolve(res.body);
-					} else {
-						reject(new Error(res.body.description));
+					if (err) {
+						return reject(err);
+					} else if (res && res.ok) {
+						return resolve(res.body);
 					}
+					reject(new Error(
+						(res && res.body && res.body.description) ||
+						'Unknown error performing POST request'
+					));
 				});
 		});
 	}
@@ -39,11 +43,15 @@ function ApiClient (token) {
 				.send(payload || {})
 				.send(options || {})
 				.end(function (err, res) {
-					if (res.ok) {
-						resolve(res.body);
-					} else {
-						reject(new Error(res.body.description));
+					if (err) {
+						return reject(err);
+					} else if (res && res.ok) {
+						return resolve(res.body);
 					}
+					reject(new Error(
+						(res && res.body && res.body.description) ||
+						'Unknown error performing GET request'
+					));
 				});
 		});
 	}
@@ -58,14 +66,20 @@ function ApiClient (token) {
 						return;
 					}
 
-					var tmpPath = tempfile(res.header['content-type'].split('/')[1]);
-					fs.writeFile(tmpPath, res.body, function (err) {
-						if (err) {
-							reject(err);
-						} else {
-							resolve(tmpPath);
-						}
-					});
+					if (res && res.ok) {
+						var tmpPath = tempfile(res.header['content-type'].split('/')[1]);
+						return fs.writeFile(tmpPath, res.body, function (err) {
+							if (err) {
+								reject(err);
+							} else {
+								resolve(tmpPath);
+							}
+						});
+					}
+					reject(new Error(
+						(res && res.body && res.body.description) ||
+						'Unknown error performing retrieving requested media'
+					));
 				});
 		});
 	}
@@ -108,18 +122,20 @@ function ApiClient (token) {
 				}
 
 				r.end(function (err, res) {
-					if (res.ok) {
-						resolve(res.body);
-					} else {
-						reject(new Error(res.body.description));
-					}
 					if (unlink) {
 						fs.unlink(media, Function.prototype);
 					}
+					if (err) {
+						return reject(err);
+					} else if (res.ok) {
+						return resolve(res.body);
+					}
+					reject(new Error(
+						(res && res.body && res.body.description) ||
+						'Unknown error performing POST request'
+					));
 				});
-			}, function (err) {
-				reject(err);
-			});
+			}, reject);
 		});
 
 	}
