@@ -41,8 +41,8 @@ function ApiClient (token, params) {
 	function _get (method, payload, options) {
 		return new Promise(function (resolve, reject) {
 			request
-        .get(format(endpoint, token, method))
-        .proxy(params.proxy)
+        			.get(format(endpoint, token, method))
+        			.proxy(params.proxy)
 				.send(payload || {})
 				.send(options || {})
 				.end(function (err, res) {
@@ -62,8 +62,8 @@ function ApiClient (token, params) {
 	function _fetchMedia (mediaLocation) {
 		return new Promise(function (resolve, reject) {
 			request
-        .get(mediaLocation)
-        .proxy(params.proxy)
+        			.get(mediaLocation)
+        			.proxy(params.proxy)
 				.end(function (err, res) {
 					if (err) {
 						reject(err);
@@ -100,8 +100,8 @@ function ApiClient (token, params) {
 			}
 
 			var r = request
-        .post(format(endpoint, token, apiMethod))
-        .proxy(params.proxy)
+        			.post(format(endpoint, token, apiMethod))
+        			.proxy(params.proxy)
 				.field('chat_id', payload.chat_id);
 
 			var mediaData = isUrl(payload.media)
