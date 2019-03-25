@@ -22,6 +22,14 @@ var client = new TelegramBotClient(MY_TOKEN);
 client.sendMessage(CHAT_ID, 'I\'m a bot, so what?');
 ```
 
+If you want to use network proxy, Instantiate a new client using your bot's token.
+
+```
+var TelegramBotClient = require('telegram-bot-client');
+var client = new TelegramBotClient(MY_TOKEN, {proxy: your ip proxy address});
+client.sendMessage(CHAT_ID, 'I\'m a bot, so what?');
+```
+
 All methods on the client are chainable and will wait for the previous operations to finish:
 
 ```js
