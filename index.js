@@ -1,6 +1,6 @@
 var ApiClient = require('./src/apiclient');
 
-function TelegramBotClient (token, promise) {
+function TelegramBotClient (token, params, promise) {
 
 	if (!token) {
 		throw new Error('You must pass a token to the constructor!');
@@ -8,7 +8,7 @@ function TelegramBotClient (token, promise) {
 
 	promise = promise || Promise.resolve();
 
-	var apiClient = new ApiClient(token);
+	var apiClient = new ApiClient(token, params);
 
 	function makeChainableMethod (method) {
 		return function () {

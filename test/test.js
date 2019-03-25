@@ -9,11 +9,15 @@ if (!TOKEN) {
 	throw new Error('Please set TELEGRAM_TOKEN before running the tests!');
 }
 
+var params = {
+  proxy: process.env.Proxy
+}
+
 describe('TelegramBotClient', function () {
 
 	describe('Chain', function () {
 		this.timeout(40000);
-		var client = new TelegramBotClient(TOKEN);
+		var client = new TelegramBotClient(TOKEN, params);
 		it('exposes all methods in an async chain', function () {
 			return client
 				.sendMessage(CHAT_ID, 'This is a test')
@@ -47,7 +51,7 @@ describe('TelegramBotClient', function () {
 
 		describe('#sendMessage(chatId, text[, options])', function () {
 			this.timeout(10000);
-			var client = new TelegramBotClient(TOKEN);
+			var client = new TelegramBotClient(TOKEN, params);
 			it('sends a message', function () {
 				return client.sendMessage(CHAT_ID, 'Foo Bar!').promise();
 			});
@@ -244,7 +248,7 @@ describe('TelegramBotClient', function () {
 	describe('Message Editing', function () {
 		describe('#editMessageText([chat_id, ]identifier, text[, options])', function () {
 			this.timeout(10000);
-			var client = new TelegramBotClient(TOKEN);
+			var client = new TelegramBotClient(TOKEN, params);
 			it('edits a sent message\'s text', function () {
 				return client.sendMessage(CHAT_ID, 'This message should not contain tpyos').promise().then(function (response) {
 					return client.editMessageText(CHAT_ID, response.result.message_id, 'This message should not contain typos').promise().then(function (response) {
@@ -264,6 +268,8 @@ describe('TelegramBotClient', function () {
 				});
 			});
 		});
-	});
+  });
+  
+
 
 });
