@@ -20,7 +20,7 @@ function TelegramBotClient (token, promise) {
 	}
 
 	for (var method in apiClient) {
-		if (apiClient.hasOwnProperty(method)) {
+		if (Object.prototype.hasOwnProperty.call(apiClient, method)) {
 			this[method] = makeChainableMethod(method);
 		}
 	}
