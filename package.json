@@ -25,8 +25,8 @@
   },
   "homepage": "https://github.com/m90/telegram-bot-client#readme",
   "devDependencies": {
-    "eslint": "^5.4.0",
-    "eslint-plugin-node": "^7.0.1",
+    "eslint": "^6.2.2",
+    "eslint-plugin-node": "^9.1.0",
     "if-env": "^1.0.4",
     "mocha": "^5.2.0"
   },
