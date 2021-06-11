@@ -1,4 +1,5 @@
 var request = require('superagent');
+require('superagent-proxy')(request);
 var util = require('./util');
 var isUrl = require('is-url');
 var fs = require('fs');
@@ -13,13 +14,14 @@ function is (type) {
 	};
 }
 
-function ApiClient (token) {
+function ApiClient (token, params) {
 
 	function _post (method, payload, options) {
 		return new Promise(function (resolve, reject) {
 			request
 				.post(format(endpoint, token, method))
-				.type('form')
+        .proxy(params.proxy)
+        .type('form')
 				.send(payload || {})
 				.send(options || {})
 				.end(function (err, res) {
@@ -39,7 +41,8 @@ function ApiClient (token) {
 	function _get (method, payload, options) {
 		return new Promise(function (resolve, reject) {
 			request
-				.get(format(endpoint, token, method))
+        			.get(format(endpoint, token, method))
+        			.proxy(params.proxy)
 				.send(payload || {})
 				.send(options || {})
 				.end(function (err, res) {
@@ -59,7 +62,8 @@ function ApiClient (token) {
 	function _fetchMedia (mediaLocation) {
 		return new Promise(function (resolve, reject) {
 			request
-				.get(mediaLocation)
+        			.get(mediaLocation)
+        			.proxy(params.proxy)
 				.end(function (err, res) {
 					if (err) {
 						reject(err);
@@ -96,7 +100,8 @@ function ApiClient (token) {
 			}
 
 			var r = request
-				.post(format(endpoint, token, apiMethod))
+        			.post(format(endpoint, token, apiMethod))
+        			.proxy(params.proxy)
 				.field('chat_id', payload.chat_id);
 
 			var mediaData = isUrl(payload.media)
