@@ -260,6 +260,14 @@ function ApiClient (token) {
 		return _get('getChat', payload);
 	};
 
+	this.exportChatInviteLink = function (chatId) {
+		var payload = {
+			chat_id: chatId
+		};
+		return _get('exportChatInviteLink', payload);
+	};
+
+
 	this.getChatAdministrators = function (chatId) {
 		var payload = {
 			chat_id: chatId
@@ -380,6 +388,68 @@ function ApiClient (token) {
 
 	this.getUpdates = function (options) {
 		return _get('getUpdates', null, options);
+	};
+
+	this.setChatPhoto = function (chatId, photo, options) {
+		var payload = {
+			chat_id: chatId,
+			media: photo
+		};
+		return _postMedia('photo', payload, options, 'setChatPhoto');
+	};
+
+	this.deleteChatPhoto = function (chatId) {
+		var payload = {
+			chat_id: chatId
+		};
+		return _post('deleteChatPhoto', payload);
+	};
+
+	this.setChatTitle = function (chatId, title) {
+		var payload = {
+			chat_id: chatId,
+			title: title
+		};
+		return _post('setChatTitle', payload);
+	};
+
+	this.setChatDescription = function (chatId, description) {
+		var payload = {
+			chat_id: chatId,
+			description: description
+		};
+		return _post('setChatDescription', payload);
+	};
+
+	this.pinChatMessage = function (chatId, identifier, option) {
+		var payload = {
+			chat_id: chatId,
+			message_id: identifier
+		};
+		return _post('pinChatMessage', payload, option);
+	};
+
+	this.unpinChatMessage = function (chatId) {
+		var payload = {
+			chat_id: chatId
+		};
+		return _post('unpinChatMessage', payload);
+	};
+
+	this.restrictChatMember = function (chatId, userId, options) {
+		var payload = {
+			chat_id: chatId,
+			user_id: userId
+		};
+		return _post('restrictChatMember', payload, options);
+	};
+
+	this.promoteChatMember = function (chatId, userId, options) {
+		var payload = {
+			chat_id: chatId,
+			user_id: userId
+		};
+		return _post('promoteChatMember', payload, options);
 	};
 
 }

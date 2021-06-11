@@ -188,6 +188,7 @@ answer an inline query
 get information on a chat
 - chatId: the chat's id
 
+
 ##### `#getChatAdministrators(chatId)`
 get the administrators of a chat
 - chatId: the chat's id
@@ -204,6 +205,49 @@ get information on a member of a chat
 ##### `#leaveChat(chatId)`
 leave a chat
 - chatId: the chat's id
+
+##### `#exportChatInviteLink(chatId)`
+generate & return a new invite link for a chat. Any previously generated link is revoked
+- chatId: the chat's id
+
+##### `#setChatPhoto(chatId, photo)`
+set a new profile photo for the chat.
+- chatId: the chat's id
+- photo: the New chat photo
+
+##### `#deleteChatPhoto(chatId)`
+delete the chat photo
+- chatId: the chat's id
+
+##### `#setChatTitle(chatId, title)`
+change the title of a chat
+- chatId: the chat's id
+- title: new chat title
+
+##### `#setChatDescription(chatId, description)`
+change the description of a chat
+- chatId: the chat's id
+- description: new chat description
+
+##### `#pinChatMessage(chatId, identifier[, options])`
+pin a message in a supergroup or a channel.
+- chatId: the chat's id
+- identifier: identifier of the message to pin
+
+##### `#unpinChatMessage(chatId)`
+unpin a message in a supergroup or a channel.
+- chatId: the chat's id
+
+##### `#restrictChatMember(chatId, userId[, options])`
+restrict a user in a supergroup
+- chatId: the chat's id of the supergroup
+- userId: unique identifier of the target user
+
+##### `#promoteChatMember(chatId, userId[, options])`
+promote or demote a user in a supergroup or a channel
+- chatId: the chat's id of the supergroup
+- userId: unique identifier of the target user
+
 
 ### Additional methods:
 
